@@ -94,9 +94,7 @@ const uploadConfig = multer({
 })
 
 //database connectivity
-const url=process.env.MONGO_URI;
-const PORT = process.env.PORT || 5000;
-mongoose.connect(url, {
+mongoose.connect("mongodb://127.0.0.1:27017/FoodDeliveryDB", {
   useNewUrlParser: true
 }).then((result) => {
   console.log("DB Connected")
@@ -140,10 +138,9 @@ server.use("/api/", reviewRoutes)
 server.use(express.static("Uploads"));
 server.use("/images", express.static("Uploads"));
 
-server.listen(PORT, () => {
+server.listen(5000, () => {
   console.log("Server Started")
 })
-
 
 
 // const express = require('express')
