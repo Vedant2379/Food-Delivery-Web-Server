@@ -101,9 +101,13 @@ mongoose.connect(process.env.MONGO_URL, {
 
 // File upload route to handle file uploads
 server.post('/uploadfile', uploadConfig.single('image'), (req, res) => {
+  // res.status(200).json({
+  //   filepath: "/images/".concat(req.file.filename), // Send the uploaded file's path
+  //   uploaded: true, // Confirm the file upload
+  // });
   res.status(200).json({
-    filepath: "/images/".concat(req.file.filename), // Send the uploaded file's path
-    uploaded: true, // Confirm the file upload
+    filepath: `${process.env.SERVER_URL}/images/${req.file.filename}`,
+    uploaded: true,
   });
 }, (err, req, res, next) => {
   res.status(400).send({ error: err.message }); // Handle errors if file is invalid
